@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ABC</title>
+<script src='./jquery-3.3.1.min.js'></script>
+<body>
+<h1>Headline</h1>
+<p>paragraph</p>
+<script>
+  $(function(){
+    $('p').text('good');
+    console.log('good');
+  });
+  $( window ).on('load', function(){
+    console.log('window loaded');
+  });
+</script>
+</html>
+
