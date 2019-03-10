@@ -9,7 +9,7 @@ var sessionOptions = {
   resave: true,
   saveUninitialized: false,
   store: new PostgreSqlStore({
-    conString: 'postgres://kbuser:j@119.29.171.215:5432/kb'
+    conString: 'postgres://kbuser:j@127.0.0.1:5432/kb'
   })
 };
 

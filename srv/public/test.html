@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="styles.css">
+<script src="./angular.min.js"></script>
+<script src="./angular-route.js"></script>
+<script src="./mark.min.js" charset="UTF-8"></script>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="cc">
+  <div ng-view></div>
+  <p>Name: <input type="text" ng-model="name" ng-click="upd()"></p>
+  <p ng-bind="name"></p>
+  <form method='get' ng-submit='query()'>
+    <input type='text' name='q' id='query' ng-model="q">
+    <input type='text' name='f' id='filter' ng-model="f">
+    <input type='submit' id='submit'>
+  </form>
+  <table class="perspective">
+    <tr ng-repeat="x in ts">
+      <td width="80%"><table class="stripe article"><tr ng-repeat="y in x.c"><td>{{ y }}</td></tr></table></td>
+      <td><table class="stripe path"><tr ng-repeat="z in x.l"><td>{{ z }}</td></tr></table></td>
+    </tr>
+  </table>
+</div>
+<script>
+  var app=angular.module('myApp',[]);
+  app.controller('cc', function($scope, $http, $timeout){
+    $http.get("http://119.29.171.215:3000/test")
+    .then(function (res) {
+      $scope.ts = res.data;
+      $timeout(function(){
+        var context = document.querySelector('.article');
+        var instance = new Mark(context);
+        instance.markRegExp(new RegExp('para'));
+        console.log('pa');
+      });
+    });
+    $scope.upd=function(){
+  var context = document.querySelector('.article');
+  var instance = new Mark(context);
+      instance.mark('para');
+      console.log('pa');
+    }
+    $scope.query=function(){
+      $http.get("http://119.29.171.215:3000/query?q="+$scope.q+"&f="+$scope.f)
+      .then(function (res) {
+        $scope.ts = res.data;
+        $timeout(function(){
+          var context = document.querySelector('.perspective');
+          var instance = new Mark(context);
+          instance.markRegExp(new RegExp($scope.q));
+          //instance.mark($scope.q);
+          console.log('pa');
+        });
+      });
+    }
+  });
+</script>
+</body>
+</html>

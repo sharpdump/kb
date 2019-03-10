@@ -8,7 +8,9 @@
     "express-session": "^1.15.6",
     "npmbox": "^4.2.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mark.js": "^8.11.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
